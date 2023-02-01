@@ -1,10 +1,13 @@
+import 'package:auditory/pages/home/home.dart';
 import 'package:auditory/pages/login/login.dart';
 import 'package:auditory/utilities/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-void main() {
+void main() async{
   runApp(const MyApp());
+  await Firebase.initializeApp();
 }
 
 final GoRouter _router = GoRouter(
@@ -15,12 +18,12 @@ final GoRouter _router = GoRouter(
         return const Login();
       },
       routes: <RouteBase>[
-        // GoRoute(
-        //   path: 'details',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const DetailsScreen();
-        //   },
-        // ),
+        GoRoute(
+          path: 'home',
+          builder: (BuildContext context, GoRouterState state) {
+            return Home();
+          },
+        ),
       ],
     ),
   ],
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
               .appBarTheme
               .copyWith(backgroundColor: Colors.black),),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
       routerConfig: _router,
     );
   }

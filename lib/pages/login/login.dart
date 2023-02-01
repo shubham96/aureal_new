@@ -1,13 +1,22 @@
 import 'dart:io';
 
+import 'package:auditory/domain/authentication/Hivesigner.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
-  Widget loginWithHiveSigner() {
-    return Container();
+  Widget loginWithHiveSigner(BuildContext context) {
+    return InkWell(onTap: (){
+      if(Platform.isIOS || Platform.isAndroid){
+        Navigator.push(context, CupertinoPageRoute(builder: (context){
+          return HiveAccount();
+        }));
+
+      }
+    },child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Colors.red), child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/hivesigner.png',cacheWidth: 100, width: 20,),title: const Text("HiveSigner",textAlign: TextAlign.center, style: TextStyle(fontSize: 15),),trailing: const SizedBox(width: 20,),)));
   }
 
   @override
@@ -24,8 +33,7 @@ class Login extends StatelessWidget {
           Expanded(flex: 2, child: Padding(
             padding: const EdgeInsets.all(30),
             child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
-
-              Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Colors.red), child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/hivesigner.png',cacheWidth: 100, width: 20,),title: const Text("HiveSigner",textAlign: TextAlign.center, style: TextStyle(fontSize: 15),),trailing: SizedBox(width: 20,),)),
+              loginWithHiveSigner(context),
               const SizedBox(height: 10,),
               Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: const Color(0xffFFFCF0)),child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/unstoppable.png', cacheWidth: 100, width: 20,),title: const Text("Unstoppable Domains",textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 15),),trailing: SizedBox(width: 20,))),
               const SizedBox(height: 10,),

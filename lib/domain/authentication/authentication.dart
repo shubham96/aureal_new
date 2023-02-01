@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../pages/home/home.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
@@ -150,7 +154,7 @@ Dio dio = Dio();
 CancelToken cancel = CancelToken();
 String? registrationToken;
 
-Future hiveAuth() async {
+Future hiveAuth(BuildContext context) async {
 
   SharedPreferences pref = await SharedPreferences.getInstance();
 
@@ -165,8 +169,7 @@ Future hiveAuth() async {
   map['registrationToken'] = registrationToken;
 
   FormData formData = FormData.fromMap(map);
-
-  await dio.post(url, data: formData, cancelToken: cancel).then((value){
+  Response? response = await dio.post(url, data: formData, cancelToken: cancel).then((value){
     if(value.statusCode == 200){
       pref.setString('token', value.data['userData']['token']);  // getting the registration Token from user
       pref.setString('userId', value.data['userData']['id']); // getting the userId assigned by Firebase or Aws
@@ -178,14 +181,18 @@ Future hiveAuth() async {
         pref.setString(
             'access_token', value.data['userData']['hiveAccessToken']); // adding hive access token into local Storage to be used later
       }
-
+      if (value.data['userData']['olduser'] == true) {
+        Navigator.push(context, CupertinoPageRoute(builder: (context){
+          return Home();
+        }));
+      } else {
+        Navigator.push(context, CupertinoPageRoute(builder: (context){
+          return Home();
+        }));
+      }
+      print("This is one the API screen");
+      print(value);
       return value;
-
-      // if (response.data['userData']['olduser'] == true) {
-      //   Navigator.popAndPushNamed(context, Home.id);
-      // } else {
-      //   Navigator.popAndPushNamed(context, SelectLanguage.id);
-      // }
     }
   });
 } // Hive Auth to send the user access tokens to backend after HiveSigner or Keychain Response

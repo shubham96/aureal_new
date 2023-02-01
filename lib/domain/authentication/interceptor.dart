@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Interceptor{
@@ -32,11 +33,15 @@ class Interceptor{
           if(value.statusCode == 200){
             return value;
           }else{
-            print(value.statusCode);
+            if (kDebugMode) {
+              print(value.statusCode);
+            }
           }
         });
       }catch(e){
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
     });
   }
@@ -55,11 +60,15 @@ class Interceptor{
           if(value.statusCode == 200){
             return value;
           }else{
-            print(value.statusCode);
+            if (kDebugMode) {
+              print(value.statusCode);
+            }
           }
         });
       }catch(e){
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
 
     });
