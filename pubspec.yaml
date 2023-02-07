@@ -46,6 +46,10 @@ dependencies:
   dio: ^4.0.6
 #  webview_flutter: ^4.0.2
   webview_flutter: ^2.3.0
+  flutter_js: ^0.6.0
+  twitter_login: ^4.3.1
+  agora_rtc_engine: ^6.1.0
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

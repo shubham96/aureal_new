@@ -19,6 +19,10 @@ class Login extends StatelessWidget {
     },child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Colors.red), child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/hivesigner.png',cacheWidth: 100, width: 20,),title: const Text("HiveSigner",textAlign: TextAlign.center, style: TextStyle(fontSize: 15),),trailing: const SizedBox(width: 20,),)));
   }
 
+  Widget loginWithUnstoppable(){
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,9 @@ class Login extends StatelessWidget {
             child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
               loginWithHiveSigner(context),
               const SizedBox(height: 10,),
-              Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: const Color(0xffFFFCF0)),child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/unstoppable.png', cacheWidth: 100, width: 20,),title: const Text("Unstoppable Domains",textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 15),),trailing: SizedBox(width: 20,))),
+              InkWell(onTap: (){
+
+              },child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: const Color(0xffFFFCF0)),child: ListTile(minLeadingWidth: 0,leading: Image.asset('assets/images/unstoppable.png', cacheWidth: 100, width: 20,),title: const Text("Unstoppable Domains",textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 15),),trailing: SizedBox(width: 20,)))),
               const SizedBox(height: 10,),
               Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: const Color(0xffFFFCF0)),child: ListTile(leading: const Icon(FontAwesomeIcons.apple,color: Colors.black,),title: const Text("Login with Apple",textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 15),),trailing: SizedBox())),
               const SizedBox(height: 20,),
